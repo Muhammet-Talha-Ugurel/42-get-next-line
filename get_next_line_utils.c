@@ -6,11 +6,12 @@
 /*   By: mugurel <muhammedtalhaugurel@gmai...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 02:42:15 by mugurel           #+#    #+#             */
-/*   Updated: 2022/12/20 04:48:10 by mugurel          ###   ########.fr       */
+/*   Updated: 2022/12/22 14:13:18 by mugurel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -22,31 +23,65 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_read_file(int fd, int line_len)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int		x;
-	char	c[1];
-	char	*str;
+	char	*memory;
+	size_t	i;
 
-	str = malloc(sizeof(char) * line_len + 1);
-	if (!str)
+	i = 0;
+	memory = malloc(count * size);
+	if (memory == NULL)
 		return (0);
-	x = 0;
-	while (line_len > x)
+	while (i < count * size)
 	{
-		read(fd, c, BUFFER_SIZE);
-		if (c[0] == '\n')
-		{
-			break ;
-		}
-		else
-			str[x] = c[0];
-		x++;
+		memory[i] = 0;
+		i++;
 	}
-	return (str);
+	return (memory);
 }
 
-void	ft_close_file(int fd)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	close(fd);
+	int		sizetotal;
+	char	*res;
+	int		i;
+	int		j;
+
+	i = 0;
+	sizetotal = ft_strlen(s1) + ft_strlen(s2);
+	res = malloc(sizeof(char) * (sizetotal + 1));
+	if (!res || !s1 || !s2)
+		return (NULL);
+	while (s1[i] != 0)
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != 0)
+	{
+		res[i] = s2[j];
+		i++;
+		j++;
+	}
+	res[sizetotal] = 0;
+	return (res);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int		i;
+
+	if (!s && *s != 0)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if ((char)c == s[i])
+		return ((char *)s + i);
+	return (0);
 }

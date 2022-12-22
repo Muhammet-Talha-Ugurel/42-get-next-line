@@ -6,7 +6,7 @@
 /*   By: mugurel <muhammedtalhaugurel@gmai...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 02:39:37 by mugurel           #+#    #+#             */
-/*   Updated: 2022/12/20 04:46:01 by mugurel          ###   ########.fr       */
+/*   Updated: 2022/12/22 16:35:44 by mugurel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-size_t	ft_strlen(const char *s);
-size_t	get_line_len(int fd);
 char	*get_next_line(int fd);
-char	*ft_read_file(int fd, int line_len);
-void	ft_close_file(int fd);
+char	*find_the_line(char *buffer);
+char	*ft_read_file(int fd, char *buffer);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
+char	*delete_the_old_line(char *);
+char	*ft_free(char *buffer, char *buf);
 
 #endif
