@@ -6,7 +6,7 @@
 /*   By: mugurel <muhammedtalhaugurel@gmai...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 05:08:39 by mugurel           #+#    #+#             */
-/*   Updated: 2022/12/23 05:08:41 by mugurel          ###   ########.fr       */
+/*   Updated: 2022/12/23 05:26:59 by mugurel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[256];
 	char		*the_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	buffer = ft_read_file(fd, buffer);
-	the_line = find_the_line(buffer);
-	buffer = delete_the_old_line(buffer);
+	buffer[fd] = ft_read_file(fd, buffer[fd]);
+	the_line = find_the_line(buffer[fd]);
+	buffer[fd] = delete_the_old_line(buffer[fd]);
 	return (the_line);
 }
 
